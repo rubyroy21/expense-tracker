@@ -1,0 +1,21 @@
+.forgot-password {
+  color: #116dff;
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.forgot-password-1 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.show-password {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: #116dff;
+  font-size: 14px;
+}
