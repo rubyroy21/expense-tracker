@@ -10,14 +10,26 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const [response, setResponse] = useState(null);
   const [jwtToken, setJwtToken] = useState();
   const [status, setStatus] = useState(false);
 
   const navigate = useNavigate();
 
+  // Regular expression for basic email validation
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+
+    // Check if the entered email matches the regex pattern
+    setIsValid(emailRegex.test(newEmail));
   };
 
   const handleLogin = (e) => {
@@ -104,7 +116,10 @@ const Login = () => {
                   style: { width: "300px" },
                 }}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
+                error={!isValid}
+                autoComplete="off"
+                helperText={!isValid ? "Invalid email address" : ""}
               />
 
               <TextField

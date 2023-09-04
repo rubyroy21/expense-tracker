@@ -9,9 +9,13 @@ const Register = () => {
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   const handleRegister = () => {
     // console.log("function called");
@@ -42,6 +46,13 @@ const Register = () => {
     );
   };
 
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+
+    // Check if the entered email matches the regex pattern
+    setIsValid(emailRegex.test(newEmail));
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -113,9 +124,11 @@ const Register = () => {
                 InputProps={{
                   style: { width: "300px" },
                 }}
-                autoComplete="on"
+                autoComplete="off"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
+                error={!isValid}
+                helperText={!isValid ? "Invalid email address" : ""}
               />
               <TextField
                 id="standard-basic"
