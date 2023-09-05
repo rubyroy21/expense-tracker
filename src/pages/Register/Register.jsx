@@ -44,6 +44,7 @@ const Register = () => {
       },
       "Register Credentials"
     );
+    navigate("/");
   };
 
   const handleEmailChange = (event) => {

@@ -68,6 +68,7 @@ const Login = () => {
     //     console.error("Error:", error);
     //   });
     console.log({ Email: email, Password: password }, "Login Credentials");
+    navigate("/expense-tracker-dashboard");
     setStatus(true);
   };
 
