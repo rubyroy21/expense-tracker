@@ -3,29 +3,7 @@ import UserTable from "./tables/UserTable";
 import EditUserForm from "./forms/EditUserForm";
 
 const ExpenseDashboard = () => {
-  const usersData = [
-    {
-      id: 1,
-      expenseName: "Tania",
-      category: "medical",
-      amount: "3400",
-      date: "21/06/2023",
-    },
-    {
-      id: 2,
-      expenseName: "Craig",
-      category: "electricity",
-      amount: "3400",
-      date: "21/06/2023",
-    },
-    {
-      id: 3,
-      expenseName: "Ben",
-      category: "mobile recharge",
-      amount: "3400",
-      date: "21/06/2023",
-    },
-  ];
+  const usersData = [];
   const initialFormState = { id: null, name: "", username: "" };
 
   const [users, setUsers] = useState(usersData);
