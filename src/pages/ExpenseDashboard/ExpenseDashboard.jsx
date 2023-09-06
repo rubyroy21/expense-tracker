@@ -4,9 +4,27 @@ import EditUserForm from "./forms/EditUserForm";
 
 const ExpenseDashboard = () => {
   const usersData = [
-    { id: 1, name: "Tania", username: "floppydiskette" },
-    { id: 2, name: "Craig", username: "siliconeidolon" },
-    { id: 3, name: "Ben", username: "benisphere" },
+    {
+      id: 1,
+      expenseName: "Tania",
+      category: "medical",
+      amount: "3400",
+      date: "21/06/2023",
+    },
+    {
+      id: 2,
+      expenseName: "Craig",
+      category: "electricity",
+      amount: "3400",
+      date: "21/06/2023",
+    },
+    {
+      id: 3,
+      expenseName: "Ben",
+      category: "mobile recharge",
+      amount: "3400",
+      date: "21/06/2023",
+    },
   ];
   const initialFormState = { id: null, name: "", username: "" };
 
@@ -40,7 +58,7 @@ const ExpenseDashboard = () => {
       <div className="flex-row">
         <div className="flex-large">
           <div>
-            <h2>{editing ? "Edit user" : "Add user"}</h2>
+            <h2>{editing ? "Edit Expense" : "Add Expense"}</h2>
             <EditUserForm
               editing={editing}
               setEditing={setEditing}
@@ -52,7 +70,7 @@ const ExpenseDashboard = () => {
           </div>
         </div>
         <div className="flex-large">
-          <h2>View users</h2>
+          <h2>View Summary</h2>
           <UserTable users={users} editRow={editRow} deleteUser={deleteUser} />
         </div>
       </div>

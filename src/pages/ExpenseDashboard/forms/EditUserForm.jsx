@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const EditUserForm = (props) => {
-  const initialFormState = { id: null, name: "", username: "" };
+  const initialFormState = {
+    id: null,
+    expenseName: "",
+    category: "",
+    amount: "",
+    date: "",
+  };
   const [user, setUser] = useState(
     props.editing ? props.currentUser : initialFormState
   );
@@ -26,27 +32,43 @@ const EditUserForm = (props) => {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (!user.name || !user.username) return;
+        if (!user.expenseName || !user.category || !user.amount || !user.date)
+          return;
 
         props.editing ? props.updateUser(user.id, user) : props.addUser(user);
         resetAddUser();
       }}
     >
-      <label>Name</label>
+      <label>Expense Name</label>
       <input
         type="text"
-        name="name"
-        value={user.name}
+        name="expenseName"
+        value={user.expenseName}
         onChange={handleInputChange}
       />
-      <label>Username</label>
+
+      <label>Category</label>
       <input
         type="text"
-        name="username"
-        value={user.username}
+        name="category"
+        value={user.category}
         onChange={handleInputChange}
       />
-      <button>{props.editing ? "Update user" : "Add user"}</button>
+      <label>Amount</label>
+      <input
+        type="text"
+        name="amount"
+        value={user.amount}
+        onChange={handleInputChange}
+      />
+      <label>Date</label>
+      <input
+        type="date"
+        name="date"
+        value={user.date}
+        onChange={handleInputChange}
+      />
+      <button>{props.editing ? "Update Expense" : "Add Expense"}</button>
       {props.editing && (
         <button onClick={resetAddUser} className="button muted-button">
           Cancel

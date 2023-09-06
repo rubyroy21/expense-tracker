@@ -4,8 +4,10 @@ const UserTable = (props) => (
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Username</th>
+        <th>Expense Name</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Date</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -13,8 +15,10 @@ const UserTable = (props) => (
       {props.users.length > 0 ? (
         props.users.map((user) => (
           <tr key={user.id}>
-            <td>{user.name}</td>
-            <td>{user.username}</td>
+            <td>{user.expenseName}</td>
+            <td>{user.category}</td>
+            <td>{user.amount}</td>
+            <td>{user.date}</td>
             <td>
               <button
                 className="button muted-button"
@@ -22,7 +26,7 @@ const UserTable = (props) => (
                   props.editRow(user);
                 }}
               >
-                Edit
+                Update
               </button>
               <button
                 className="button muted-button"
