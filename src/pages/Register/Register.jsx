@@ -1,59 +1,49 @@
+/* eslint-disable no-useless-concat */
 import React, { useState } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import Footer from "../../components/Footer/Footer";
 
 const Register = () => {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [userRole, setUserRole] = useState("");
   const [password, setPassword] = useState("");
-  const [isValid, setIsValid] = useState(true);
-
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const handleRegister = async () => {
+    try {
+      const response = await fetch(
+        "https://localhost:7020/api/Authentication/Register",
+        {
+          method: "POST",
 
-  const handleRegister = () => {
-    // console.log("function called");
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     email: email,
-    //     fname: fname,
-    //     lname: lname,
-    //     pwd: password,
-    //   }),
-    // };
-    // fetch("http://dev.xlrt.ai:8090/tenants/user/signup", requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data, "data");
-    //   })
-    //   .catch((err) => console.log(err));
-    console.log(
-      {
-        firstName: fname,
-        lastName: lname,
-        Email: email,
-        Password: password,
-      },
-      "Register Credentials"
-    );
-    navigate("/");
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName: userName,
+            phoneNo: phoneNo,
+            passWord: password,
+            userRole: userRole,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+
+      const data = await response.json();
+      console.log(data, "Response");
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-
-    // Check if the entered email matches the regex pattern
-    setIsValid(emailRegex.test(newEmail));
-  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -97,28 +87,31 @@ const Register = () => {
         <div className="column">
           <div className="input-fields">
             <form autoComplete="off">
-              <TextField
-                id="standard-basic"
-                label="First Name"
-                variant="standard"
-                InputProps={{
-                  style: { width: "300px" },
-                }}
-                value={fname}
-                onChange={(e) => setFname(e.target.value)}
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Enter your User Name"
+                id="input-fields"
+                required
               />
-              <TextField
-                id="standard-basic"
-                label="Last Name"
-                variant="standard"
-                InputProps={{
-                  style: { width: "300px" },
-                }}
-                autoComplete="on"
-                value={lname}
-                onChange={(e) => setLname(e.target.value)}
+              <input
+                type="text"
+                value={phoneNo}
+                onChange={(e) => setPhoneNo(e.target.value)}
+                placeholder="Enter your Phone Number"
+                id="input-fields"
+                required
               />
-              <TextField
+              <input
+                type="email"
+                value={userRole}
+                onChange={(e) => setUserRole(e.target.value)}
+                placeholder="Enter your User Role"
+                id="input-fields"
+                required
+              />
+              {/* <TextField
                 id="standard-basic"
                 label="Email"
                 variant="standard"
@@ -130,19 +123,17 @@ const Register = () => {
                 onChange={handleEmailChange}
                 error={!isValid}
                 helperText={!isValid ? "Invalid email address" : ""}
-              />
-              <TextField
-                id="standard-basic"
-                label="Password"
-                variant="standard"
+              /> */}
+
+              <input
                 type={showPassword ? "text" : "password"}
-                InputProps={{
-                  style: { width: "300px" },
-                }}
-                autoComplete="on"
+                placeholder="Enter your Password"
                 value={password}
+                id="input-fields"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
+
               <div className="show-password" onClick={togglePasswordVisibility}>
                 {showPassword ? "Hide" : "Show"} Password
               </div>

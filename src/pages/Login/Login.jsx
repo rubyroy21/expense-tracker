@@ -109,7 +109,24 @@ const Login = () => {
         <div className="column">
           <div className="input-fields">
             <form autoComplete="off" onSubmit={handleLogin}>
-              <TextField
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Enter your Email"
+                id="input-fields"
+                required
+              />
+
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your Password"
+                value={password}
+                id="input-fields"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {/* <TextField
                 id="standard-basic"
                 label="Email"
                 variant="standard"
@@ -134,7 +151,7 @@ const Login = () => {
                 }}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
+              /> */}
               <div className="show-password" onClick={togglePasswordVisibility}>
                 {showPassword ? "Hide" : "Show"} Password
               </div>
